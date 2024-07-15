@@ -1,0 +1,171 @@
+<?php
+
+//src="https://mdbcdn.b-cdn.net/img/Photos/Slides/img%20(18).webp"
+// https://github.com/barryvdh/laravel-debugbar
+//5)-php artisan make:model DietaryRecommendation -mcrsfR
+
+//php artisan make:notification EmailContact
+//https://laravel.com/docs/9.x/
+// composer require yajra/laravel-datatables:"^9.0"
+// Yajra\DataTables\DataTablesServiceProvider::class,
+// php artisan vendor:publish --tag=datatables
+
+// php artisan config:cache
+
+// DietaryRecommendation
+
+// Validate the incoming request data
+$validatedData = $request->validate([
+    'name' => 'required|string|max:255',
+    'email' => 'required|email|unique:users,email',
+    // Add any other validation rules you need
+]);
+
+// Create a new user using the request data
+$user = User::create($validatedData);
+
+// Alternatively, if you're updating an existing user, you can do:
+$user = User::find($id);
+$user->update($validatedData);
+
+// If you want to retrieve the inserted/updated user data
+return $user;
+
+// Create a new user using the request data
+$user = User::create($request->all());
+
+// Alternatively, if you're updating an existing user, you can do:
+$user = User::find($id);
+$user->update($request->all());
+
+// If you want to retrieve the inserted/updated user data
+return $user;
+
+use App\Models\User;
+use Illuminate\Http\Request;
+
+ function store(Request $request)
+{
+    // Create a new user using the request data
+    $user = User::create($request->all());
+
+    // If you want to retrieve the inserted user data
+    return $user;
+}
+
+ function show($id)
+{
+    // Find the user by ID
+    $user = User::findOrFail($id);
+
+    // Return the user data
+    return $user;
+}
+
+ function update(Request $request, $id)
+{
+    // Find the user by ID
+    $user = User::findOrFail($id);
+
+    // Update the user with the request data
+    $user->update($request->all());
+
+    // Return the updated user data
+    return $user;
+}
+
+ function destroy($id)
+{
+    // Find the user by ID
+    $user = User::findOrFail($id);
+
+    // Delete the user
+    $user->delete();
+
+    // Optionally, you can return a success message
+    return response()->json(['message' => 'User deleted successfully']);
+}
+
+function destroy2($id)
+{
+    // soft delete
+    // Section::findOrFail($id)->delete();
+    // force delete
+    Section::findOrFail($id)->forceDelete();
+    // session()->flash('delete');
+    // return redirect()->route('section.index');
+    return response()->json(['message' => 'Section deleted successfully']);
+}
+
+$validated = $request->validate([
+    'title' => 'required|unique:posts|max:255',
+    'body' => 'required',
+]);
+
+$validatedData = $request->validate([
+    'title' => ['required', 'unique:posts', 'max:255'],
+    'body' => ['required'],
+]);
+
+$request->validate([
+    'title' => 'bail|required|unique:posts|max:255',
+    'body' => 'required',
+]);
+
+$request->validate([
+    'title' => 'required|unique:posts|max:255',
+    'author.name' => 'required',
+    'author.description' => 'required',
+]);
+
+// @if ($errors->any())
+//     <div class="alert alert-danger">
+//         <ul>
+//             @foreach ($errors->all() as $error)
+//                 <li>{{ $error }}</li>
+//             @endforeach
+//         </ul>
+//     </div>
+// @endif
+
+// this is custom laravel logger using chat GPT 3.5
+// https://chat.openai.com/share/55919d26-e033-4c7a-8a37-bd648eb6c231
+
+// JWT Authentication
+// https://www.positronx.io/laravel-jwt-authentication-tutorial-user-login-signup-api/
+
+//php artisan queue:work
+
+// this is custom laravel logger using Ping
+//https://sl.bing.net/heYDnyB4cQC
+
+// this is custom laravel logger using chat GPT 3.5
+//https://chat.openai.com/share/1ffc64c2-8459-45dc-8d3e-21e6d8884da1
+
+// this is custom laravel logger using chat GPT 4.5
+//https://www.popai.pro/share.html?shareKey=f5dbce729a9780e5e7bd82757cb74c00b21fa3251f081aed96080e3b5e52dae7
+
+// this is how to install laravel-echo-server
+//https://chat.openai.com/share/466b18a1-1d74-48fc-bf15-c8c8e7120569
+
+
+/*_____________________________________________________________________________
+__________  DO YOU HAVE WHAT IT TAKES TO FIND QUOKKA PRO TREASURE?  ___________
+          |                   |                  |                     |
+ _________|________________.=""_;=.______________|_____________________|_______
+|                   |  ,-"_,=""     `"=.|                  |
+|___________________|__"=._o`"-._        `"=.______________|___________________
+          |                `"=._o`"=._      _`"=._                     |
+ _________|_____________________:=._o "=._."_.-="'"=.__________________|_______
+|                   |    __.--" , ; `"=._o." ,-"""-._ ".   |
+|___________________|_._"  ,. .` ` `` ,  `"-._"-._   ". '__|___________________
+          |           |o`"=._` , "` `; .". ,  "-._"-._; ;              |
+ _________|___________| ;`-.o`"=._; ." ` '`."\` . "-._ /_______________|_______
+|                   | |o;    `"-.o`"=._``  '` " ,__.--o;   |
+|___________________|_| ;     (#) `-.o `"=.`_.--"_o.-; ;___|___________________
+____/______/______/___|o;._    "      `".o|o_.--"    ;o;____/______/______/____
+/______/______/______/_"=._o--._        ; | ;        ; ;/______/______/______/_
+____/______/______/______/__"=._o--._   ;o|o;     _._;o;____/______/______/____
+/______/______/______/______/____"=._o._; | ;_.--"o.--"_/______/______/______/_
+____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
+/______/______/______/______/______/______/______/______/______/______/______*/
